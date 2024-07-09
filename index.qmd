@@ -1,0 +1,216 @@
+---
+title: "Quarto, themes, and you!"
+subtitle: Carlos Scheidegger @ Mayo Clinic, 2024-07-09
+title-slide-attributes:
+  data-background-color: black
+  data-background-image: _extensions/positslides/assets/backgrounds/title-slide-option-1.png
+  data-background-size: contain
+format:
+  positslides-revealjs: 
+    width: "1600"
+    height: "900"
+    filters:
+      - positslides
+    footer: "Quarto themes @ Mayo Clinic <https://posit-carlos.quarto.pub/mayo-clinic-jul-2024>"
+---
+
+## Tiny bio
+
+- Lead developer for the Quarto project, have worked on the project since joining Posit (fka RStudio) three years ago
+- Previous life: computer science academic researcher for over a decade
+
+## Housekeeping
+
+- I'm using Quarto 1.5 for this presentation, and discussing features that shipped with Quarto 1.5 (last week). 
+- It's very stable. If you can update, I highly recommend it.
+- This presentation itself is a Quarto document published at <https://quarto.pub>, see the footer below.
+
+# Themes: the present
+
+## Quarto themes
+
+- Quarto ships great-looking templates for websites, presentations, PDF reports, dashboards, and more
+- It also lets you customize the appearance of all of these formats
+
+## Theming HTML documents
+
+- Predefined themes
+- CSS
+- SCSS
+- Create your own format
+
+::: callout-note
+
+Quarto is designed to grow with you, and offers you complete extensibility when 
+you need it. (That, of course, comes with a larger needed effort).
+
+:::
+
+## Predefined themes
+
+Add to your `_quarto.yml` configuration, or to document front matter:
+
+```yaml
+format:
+  html:
+    theme: cerulean
+```
+
+Quarto ships with all 25 [bootswatch](https://bootswatch.com/) themes.
+
+::: footer
+
+Learn more: <https://quarto.org/docs/output-formats/html-themes.html>
+
+:::
+
+## Light + dark modes
+
+Add this:
+
+```yaml
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+```
+
+::: footer
+
+Learn more: <https://quarto.org/docs/output-formats/html-themes.html>
+
+:::
+
+## CSS
+
+Add to your configuration:
+
+```yaml
+format:
+  html:
+    css: my-styles.css
+```
+
+The CSS stylesheet will be added to your document, and it can be as simple as
+
+```css
+body {
+    background-color: #90a0c0;
+}
+```
+
+::: footer
+
+Learn more: <https://quarto.org/docs/output-formats/html-themes.html>
+
+:::
+
+## SCSS
+
+To unlock deeper configurability of Quarto's styling, including 1,400+ variables that control fonts, colors, padding, etc, you'll eventually want to learn SCSS. Add to your configuration:
+
+```yaml
+format:
+  html:
+    theme: custom.scss
+```
+
+For example:
+
+```scss
+/*-- scss:functions --*/ // <- these are needed in Quarto!
+@function invert($color, $amount: 100%) {
+  $inverse: change-color($color, $hue: hue($color) + 180);
+  @return mix($inverse, $color, $amount);
+}
+/*-- scss:defaults --*/
+$primary-color: #036;
+/*-- scss:rules --*/
+.header {
+  background-color: invert($primary-color, 80%);
+}
+```
+
+::: footer
+
+More about SCSS in Quarto: <https://quarto.org/docs/output-formats/html-themes-more.html>
+
+:::
+
+
+## Additional resources
+
+- Isabella Velásquez's Intro to Quarto: <https://ivelasq.quarto.pub/intro-to-quarto-2024/#/html-theming>
+
+- Emil Hvitfeldt's Slidecraft series: <https://emilhvitfeldt.com/post/slidecraft-colors-fonts/>
+
+::: footer
+
+Learn more: <https://quarto.org/docs/output-formats/html-themes.html>
+
+:::
+
+
+## Roll your own format
+
+Quarto lets you create an entirely new custom format, and then
+package it so others in your organization can use it.
+
+::: footer
+
+Learn more: <https://quarto.org/docs/extensions/formats.html>
+
+:::
+
+## Caveats
+
+::: callout-warning
+
+There's one annoying Quarto bug we're going to fix in 1.6: a Quarto project
+can only have a single SASS theme for all of its documents.
+
+:::
+
+## RevealJS presentations
+
+- `revealjs` is ultimately an HTML format, and so all of the above applies
+
+- The HTML that Quarto emits in `revealjs` is slightly different from regular webpages, and so the specific themes need to be adapted
+
+::: footer
+
+More on `revealjs` themes: https://quarto.org/docs/presentations/revealjs/themes.html
+
+:::
+
+## PDF reports, 1
+
+- By default, Quarto uses LaTeX for PDF generation
+- LaTeX customization happens through LaTeX templates
+- Totally different from HTML formats
+
+## PDF reports, 2
+
+- Quarto recently added support for Typst: https://typst.app
+- More modern PDF generation. Much less mature ecosystem, but more much more easily customizable
+- **Quarto feature highlight**:  Styled tables, see <https://quarto.org/docs/output-formats/typst.html#typst-css>
+
+::: footer
+Learn more about Typst: https://quarto.org/docs/output-formats/typst-custom.html
+:::
+
+# Themes: the (near) future
+
+## `v1.6` upcoming feature: `_brand.yml`
+
+## Acknowledgments
+
+- Emil Hvitfeldt
+- Isabella Velásquez
+- Rich Iannone (`gt` + `great_tables`)
+- Gordon + Christophe
+- Charlotte + Mine
+- Our users
+
+## Thank you!
