@@ -7,6 +7,7 @@ title-slide-attributes:
   data-background-size: contain
 format:
   positslides-revealjs: 
+    slide-number: true
     width: "1600"
     height: "900"
     filters:
@@ -23,7 +24,8 @@ format:
 
 - I'm using Quarto 1.5 for this presentation, and discussing features that shipped with Quarto 1.5 (last week). 
 - It's very stable. If you can update, I highly recommend it.
-- This presentation itself is a Quarto document published at <https://quarto.pub>, see the footer below.
+- This presentation itself is a Quarto document published at <https://quarto.pub>: <https://posit-carlos.quarto.pub/mayo-clinic-jul-2024>.
+- The source code for the presentation is on GitHub: <https://github.com/cscheid/2024-jul-mayo-clinic-talk>
 
 # Themes: the present
 
@@ -204,6 +206,87 @@ Learn more about Typst: https://quarto.org/docs/output-formats/typst-custom.html
 
 ## `v1.6` upcoming feature: `_brand.yml`
 
+- Today: different formats require different theming configurations.
+
+- Quarto lets you write Markdown once and produce websites, reports, books, presentations, emails, etc. So why don't we do the same thing for themes?
+
+::: callout-note
+
+We intend this feature to solve "90%" of the theming requirements across a variety of formats. But, by the very nature of theming customizations, it can never be a
+substitute for true custom formats. Still, we expect it to be the feature that
+users reach first for when creating "branded documents"
+
+:::
+
+## `_brand.yml`: sneak peek
+
+```yaml
+logo:
+  small: posit-icon.png
+  medium: posit.png
+  large: posit.svg
+```
+
+## `_brand.yml`: sneak peek
+
+```yaml
+color:
+  palette:
+    blue: "#447099"
+    orange: "#EE6331"
+    gray: "#404041"
+    white: "#FFFFFF"
+    teal: "#419599"
+    green: "#72994E"
+    burgundy: "#9A4665"
+  theme:
+    foreground: "#151515"
+    background: white
+    primary: blue
+    secondary: "#707073"
+    tertiary: "#C2C2C4"
+    success: green
+    info: teal
+    warning: orange
+    danger: burgundy
+    light: white
+    dark: gray
+```
+
+## `_brand.yml`: sneak peek
+
+```yaml
+typography:
+  font:
+    - google: "Open Sans"
+    - google: "Fira Code"
+    - google:
+        family: "Roboto Slab"
+        weight: 600
+        style: normal
+        display: block
+  base:
+    family: "Open Sans"
+    line-height: 1.25
+    size: 1rem
+  headings:
+    family: "Roboto Slab"
+    color: primary
+    weight: 600
+  monospace:
+    family: "Fira Code"
+    size: 0.9em
+```
+
+## `_brand.yml` is more than a Quarto feature
+
+`_brand.yml` is designed to cut across a wide swath of Posit-supported products. **NB: no timeline or promise on any of these!!**
+
+- Shiny documents (both R and Python)
+- Visualization libraries:
+  - concrete plans in R (through `thematic`, so both base R plots and grid graphics ie `ggplot2`)
+  - designs being considered for Python ecosystem (specifically Matplotlib theming, so `plotnine`, `matplotlib`, `seaborn`)
+
 ## Acknowledgments
 
 - Emil Hvitfeldt
@@ -213,4 +296,5 @@ Learn more about Typst: https://quarto.org/docs/output-formats/typst-custom.html
 - Charlotte + Mine
 - Our users
 
-## Thank you!
+# Thank you!
+
